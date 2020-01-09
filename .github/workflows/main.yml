@@ -6,9 +6,15 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+   
+   steps:
+    - name: VARIABLES DE ENTORNO
+      env:
+        SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+        DOMINIO: franhv.surge.sh
 
     steps:
     - uses: actions/checkout@v1
     - name: Run surge
-      run: surge ./_build $dominio --token $token
+      run: surge ./_build $DOMINIO --token $SURGE_TOKEN
 
