@@ -1,7 +1,3 @@
-name: CI
-
-on: [push]
-
 name: Deploy Website
 
 on: [push]
