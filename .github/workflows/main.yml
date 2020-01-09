@@ -2,22 +2,20 @@ name: CI
 
 on: [push]
 
+name: Deploy Website
+
+on: [push]
+
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    
+    name: Deploying to surge
     steps:
-    - uses: actions/checkout@v1
-    - name: VARIABLES DE ENTORNO
-      env:
-        SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-        DOMINIO: franhv.surge.sh
-    - name: Install surge and fire deployment
-      uses: actions/setup-node@v1
-      with:
-        node-version: 8
-    - run: npm install -g surge
-    - name: Run surge
-      run: surge ./_build $DOMINIO --token $SURGE_TOKEN
+      - uses: actions/checkout@v1
+      - name: Install surge and fire deployment
+        uses: actions/setup-node@v1
+        with:
+          node-version: 8
+      - run: npm install -g surge
+      - run: surge ./_build/ ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
 
